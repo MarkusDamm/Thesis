@@ -3,6 +3,7 @@ using UnityEngine;
 public class TriggerPlatformCollider : MonoBehaviour
 {
     MovingPlatform platform;
+    [SerializeField] GameObject bars;
 
     // Start is called before the first frame update
     void Start()
@@ -14,5 +15,6 @@ public class TriggerPlatformCollider : MonoBehaviour
     {
         Debug.Log("triggered by " + collider);
         platform.canMove = true;
+        bars.SetActive(true);
     }
 }

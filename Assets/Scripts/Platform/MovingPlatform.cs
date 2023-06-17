@@ -6,6 +6,7 @@ public class MovingPlatform : MonoBehaviour
     [SerializeField] float speed;
     [SerializeField] int startPoint;
     [SerializeField] Transform[] points;
+    [SerializeField] GameObject bars;
 
     int i;
     bool reverse;
@@ -23,6 +24,7 @@ public class MovingPlatform : MonoBehaviour
         if (Vector3.Distance(transform.position, points[i].position) < 0.01f)
         {
             canMove = false;
+            bars.SetActive(false);
 
             if (i == points.Length - 1)
             {
