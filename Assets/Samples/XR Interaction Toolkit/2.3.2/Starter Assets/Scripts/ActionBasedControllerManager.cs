@@ -105,59 +105,60 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
         // 1. If the Teleportation Ray is engaged, the Ray interactor is disabled
         // 2. The interaction group ensures that the Direct and Ray interactors cannot interact at the same time, with the Direct interactor taking priority
         // 3. If the Ray interactor is selecting, all locomotion controls are disabled (teleport ray, move, and turn controls) to prevent input collision
-        void SetupInteractorEvents()
-        {
-            if (m_RayInteractor != null)
-            {
-                m_RayInteractor.selectEntered.AddListener(OnRaySelectEntered);
-                m_RayInteractor.selectExited.AddListener(OnRaySelectExited);
-            }
 
-            var teleportModeActivateAction = GetInputAction(m_TeleportModeActivate);
-            if (teleportModeActivateAction != null)
-            {
-                teleportModeActivateAction.performed += OnStartTeleport;
-                teleportModeActivateAction.canceled += OnCancelTeleport;
-            }
+        // void SetupInteractorEvents()
+        // {
+        //     if (m_RayInteractor != null)
+        //     {
+        //         m_RayInteractor.selectEntered.AddListener(OnRaySelectEntered);
+        //         m_RayInteractor.selectExited.AddListener(OnRaySelectExited);
+        //     }
 
-            var teleportModeCancelAction = GetInputAction(m_TeleportModeCancel);
-            if (teleportModeCancelAction != null)
-            {
-                teleportModeCancelAction.performed += OnCancelTeleport;
-            }
-        }
+        //     var teleportModeActivateAction = GetInputAction(m_TeleportModeActivate);
+        //     if (teleportModeActivateAction != null)
+        //     {
+        //         teleportModeActivateAction.performed += OnStartTeleport;
+        //         teleportModeActivateAction.canceled += OnCancelTeleport;
+        //     }
 
-        void TeardownInteractorEvents()
-        {
-            if (m_RayInteractor != null)
-            {
-                m_RayInteractor.selectEntered.RemoveListener(OnRaySelectEntered);
-                m_RayInteractor.selectExited.RemoveListener(OnRaySelectExited);
-            }
+        //     var teleportModeCancelAction = GetInputAction(m_TeleportModeCancel);
+        //     if (teleportModeCancelAction != null)
+        //     {
+        //         teleportModeCancelAction.performed += OnCancelTeleport;
+        //     }
+        // }
 
-            var teleportModeActivateAction = GetInputAction(m_TeleportModeActivate);
-            if (teleportModeActivateAction != null)
-            {
-                teleportModeActivateAction.performed -= OnStartTeleport;
-                teleportModeActivateAction.canceled -= OnCancelTeleport;
-            }
+        // void TeardownInteractorEvents()
+        // {
+            // if (m_RayInteractor != null)
+            // {
+            //     m_RayInteractor.selectEntered.RemoveListener(OnRaySelectEntered);
+            //     m_RayInteractor.selectExited.RemoveListener(OnRaySelectExited);
+            // }
 
-            var teleportModeCancelAction = GetInputAction(m_TeleportModeCancel);
-            if (teleportModeCancelAction != null)
-            {
-                teleportModeCancelAction.performed -= OnCancelTeleport;
-            }
-        }
+            // var teleportModeActivateAction = GetInputAction(m_TeleportModeActivate);
+            // if (teleportModeActivateAction != null)
+            // {
+            //     teleportModeActivateAction.performed -= OnStartTeleport;
+            //     teleportModeActivateAction.canceled -= OnCancelTeleport;
+            // }
 
-        void OnStartTeleport(InputAction.CallbackContext context)
-        {
-            m_Teleporting = true;
+            // var teleportModeCancelAction = GetInputAction(m_TeleportModeCancel);
+            // if (teleportModeCancelAction != null)
+            // {
+            //     teleportModeCancelAction.performed -= OnCancelTeleport;
+            // }
+        // }
 
-            if (m_TeleportInteractor != null)
-                m_TeleportInteractor.gameObject.SetActive(true);
+        // void OnStartTeleport(InputAction.CallbackContext context)
+        // {
+        //     m_Teleporting = true;
 
-            RayInteractorUpdate();
-        }
+        //     if (m_TeleportInteractor != null)
+        //         m_TeleportInteractor.gameObject.SetActive(true);
+
+        //     RayInteractorUpdate();
+        // }
 
         void OnCancelTeleport(InputAction.CallbackContext context)
         {
@@ -168,13 +169,13 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
             // the teleport interactor has a chance to complete the teleport if needed.
             // OnAfterInteractionEvents will handle deactivating its GameObject.
 
-            RayInteractorUpdate();
+            // RayInteractorUpdate();
         }
 
         void RayInteractorUpdate()
         {
-            if (m_RayInteractor != null)
-                m_RayInteractor.gameObject.SetActive(!m_Teleporting);
+            // if (m_RayInteractor != null)
+            //     m_RayInteractor.gameObject.SetActive(!m_Teleporting);
         }
 
         void OnRaySelectEntered(SelectEnterEventArgs args)
@@ -204,13 +205,13 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
             if (m_TeleportInteractor != null)
                 m_TeleportInteractor.gameObject.SetActive(false);
 
-            SetupInteractorEvents();
+            // SetupInteractorEvents();
         }
 
-        protected void OnDisable()
-        {
-            TeardownInteractorEvents();
-        }
+        // protected void OnDisable()
+        // {
+        //     TeardownInteractorEvents();
+        // }
 
         protected void Start()
         {
@@ -226,48 +227,48 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
 
             // Ensure interactors are properly set up in the interaction group by adding
             // them if necessary and ordering Direct before Ray interactor.
-            var directInteractorIndex = -1;
-            var rayInteractorIndex = -1;
-            m_ManipulationInteractionGroup.GetGroupMembers(s_GroupMembers);
-            for (var i = 0; i < s_GroupMembers.Count; ++i)
-            {
-                var groupMember = s_GroupMembers[i];
-                if (ReferenceEquals(groupMember, m_DirectInteractor))
-                    directInteractorIndex = i;
-                else if (ReferenceEquals(groupMember, m_RayInteractor))
-                    rayInteractorIndex = i;
-            }
+            // var directInteractorIndex = -1;
+            // var rayInteractorIndex = -1;
+            // m_ManipulationInteractionGroup.GetGroupMembers(s_GroupMembers);
+            // for (var i = 0; i < s_GroupMembers.Count; ++i)
+            // {
+            //     var groupMember = s_GroupMembers[i];
+            //     if (ReferenceEquals(groupMember, m_DirectInteractor))
+            //         directInteractorIndex = i;
+            //     // else if (ReferenceEquals(groupMember, m_RayInteractor))
+            //     //     rayInteractorIndex = i;
+            // }
 
-            if (directInteractorIndex < 0)
-            {
-                // Must add Direct interactor to group, and make sure it is ordered before the Ray interactor
-                if (rayInteractorIndex < 0)
-                {
-                    // Must add Ray interactor to group
-                    m_ManipulationInteractionGroup.AddGroupMember(m_DirectInteractor);
-                    m_ManipulationInteractionGroup.AddGroupMember(m_RayInteractor);
-                }
-                else
-                {
-                    m_ManipulationInteractionGroup.MoveGroupMemberTo(m_DirectInteractor, rayInteractorIndex);
-                }
-            }
-            else
-            {
-                if (rayInteractorIndex < 0)
-                {
-                    // Must add Ray interactor to group
-                    m_ManipulationInteractionGroup.AddGroupMember(m_RayInteractor);
-                }
-                else
-                {
-                    // Must make sure Direct interactor is ordered before the Ray interactor
-                    if (rayInteractorIndex < directInteractorIndex)
-                    {
-                        m_ManipulationInteractionGroup.MoveGroupMemberTo(m_DirectInteractor, rayInteractorIndex);
-                    }
-                }
-            }
+            // if (directInteractorIndex < 0)
+            // {
+            //     // Must add Direct interactor to group, and make sure it is ordered before the Ray interactor
+            //     if (rayInteractorIndex < 0)
+            //     {
+            //         // Must add Ray interactor to group
+            //         m_ManipulationInteractionGroup.AddGroupMember(m_DirectInteractor);
+            //         m_ManipulationInteractionGroup.AddGroupMember(m_RayInteractor);
+            //     }
+            //     else
+            //     {
+            //         m_ManipulationInteractionGroup.MoveGroupMemberTo(m_DirectInteractor, rayInteractorIndex);
+            //     }
+            // }
+            // else
+            // {
+            //     if (rayInteractorIndex < 0)
+            //     {
+            //         // Must add Ray interactor to group
+            //         m_ManipulationInteractionGroup.AddGroupMember(m_RayInteractor);
+            //     }
+            //     else
+            //     {
+            //         // Must make sure Direct interactor is ordered before the Ray interactor
+            //         if (rayInteractorIndex < directInteractorIndex)
+            //         {
+            //             m_ManipulationInteractionGroup.MoveGroupMemberTo(m_DirectInteractor, rayInteractorIndex);
+            //         }
+            //     }
+            // }
         }
 
         IEnumerator OnAfterInteractionEvents()
