@@ -13,13 +13,8 @@ public class UITextInput : MonoBehaviour
         textMesh.SetText("");
     }
 
-    // Update is called once per frame
-    void Update()
+    public void writeText(string _letter)
     {
-        
-    }
-
-    public void writeText(string _letter){
         textMesh.SetText(textMesh.text + _letter);
     }
 }
