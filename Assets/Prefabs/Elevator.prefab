@@ -132,7 +132,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -1561660181216592469, guid: 7ab6f3b0fd1a6ba41b2a47766c16613f, type: 3}
+  - {fileID: 2100000, guid: aa416f95a51dd454fb8010b7a267751e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -187,6 +187,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86361dcbaff393b4086ac769e6a0895b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  usesInput: 0
   canMove: 0
   speed: 0.2
   startPoint: 0
@@ -194,6 +195,7 @@ MonoBehaviour:
   - {fileID: 2783958341134055842}
   - {fileID: 4445357369148227607}
   bars: {fileID: 9009959382301918975}
+  buttons: []
 --- !u!114 &4586750781376675881
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -339,6 +341,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 767195a2c8d14174cb0b3299e68f2675,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: -876546973899608171, guid: 6e5f6feb5eeeb3e4f8a656522ebbb78e,
+        type: 3}
     - target: {fileID: 919132149155446097, guid: 767195a2c8d14174cb0b3299e68f2675,
         type: 3}
       propertyPath: m_Name
