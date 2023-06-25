@@ -6,18 +6,31 @@ public class MovingPlatform : MonoBehaviour
     public bool canMove;
     [SerializeField] float speed;
     [SerializeField] int startPoint;
-    [SerializeField] Transform[] points;
+    [SerializeField] Transform[] m_points;
     [SerializeField] GameObject bars;
     [SerializeField] GameObject[] buttons;
 
+    int m_currentLevel;
     int i;
     bool reverse;
+
+    public int currentLevel
+    {
+        get { return m_currentLevel; }
+        private set { m_currentLevel = value; }
+    }
+
+    public Transform[] points
+    {
+        get { return m_points; }
+        private set { m_points = value; }
+    }
 
     // Start is called before the first frame update
     void Start()
     {
         transform.position = points[startPoint].position;
-        i = startPoint;
+        i = currentLevel = startPoint;
 
         int n = 0;
         foreach (var button in buttons)
@@ -37,6 +50,7 @@ public class MovingPlatform : MonoBehaviour
         {
             canMove = false;
             bars.SetActive(false);
+            currentLevel = i;
 
             if (i == points.Length - 1)
             {
