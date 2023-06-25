@@ -11758,40 +11758,15 @@ PrefabInstance:
       propertyPath: m_EnableFreeZMovement
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1897293769294048522, guid: d9aa38eafeca4b84fae927cc58ff1f48,
+    - target: {fileID: 2981852848814901229, guid: d9aa38eafeca4b84fae927cc58ff1f48,
         type: 3}
-      propertyPath: m_HideControllerOnSelect
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2094705181585626440, guid: d9aa38eafeca4b84fae927cc58ff1f48,
-        type: 3}
-      propertyPath: m_Enabled
+      propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3191840777399337222, guid: d9aa38eafeca4b84fae927cc58ff1f48,
         type: 3}
       propertyPath: m_TagString
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 3844319050161580746, guid: d9aa38eafeca4b84fae927cc58ff1f48,
-        type: 3}
-      propertyPath: m_Radius
-      value: 0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 3844319050161580746, guid: d9aa38eafeca4b84fae927cc58ff1f48,
-        type: 3}
-      propertyPath: m_Center.x
-      value: 0.03
-      objectReference: {fileID: 0}
-    - target: {fileID: 3844319050161580746, guid: d9aa38eafeca4b84fae927cc58ff1f48,
-        type: 3}
-      propertyPath: m_Center.y
-      value: -0.04
-      objectReference: {fileID: 0}
-    - target: {fileID: 3844319050161580746, guid: d9aa38eafeca4b84fae927cc58ff1f48,
-        type: 3}
-      propertyPath: m_Center.z
-      value: 0.02
       objectReference: {fileID: 0}
     - target: {fileID: 3929774957925755798, guid: d9aa38eafeca4b84fae927cc58ff1f48,
         type: 3}
@@ -11801,11 +11776,6 @@ PrefabInstance:
     - target: {fileID: 4295542154932533284, guid: d9aa38eafeca4b84fae927cc58ff1f48,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4390595296608498001, guid: d9aa38eafeca4b84fae927cc58ff1f48,
-        type: 3}
-      propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4457791178448422439, guid: d9aa38eafeca4b84fae927cc58ff1f48,
@@ -11873,41 +11843,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5148811319687158591, guid: d9aa38eafeca4b84fae927cc58ff1f48,
-        type: 3}
-      propertyPath: m_Radius
-      value: 0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 5148811319687158591, guid: d9aa38eafeca4b84fae927cc58ff1f48,
-        type: 3}
-      propertyPath: m_Center.x
-      value: -0.03
-      objectReference: {fileID: 0}
-    - target: {fileID: 5148811319687158591, guid: d9aa38eafeca4b84fae927cc58ff1f48,
-        type: 3}
-      propertyPath: m_Center.y
-      value: -0.04
-      objectReference: {fileID: 0}
-    - target: {fileID: 5148811319687158591, guid: d9aa38eafeca4b84fae927cc58ff1f48,
-        type: 3}
-      propertyPath: m_Center.z
-      value: 0.02
-      objectReference: {fileID: 0}
-    - target: {fileID: 6109286818629308506, guid: d9aa38eafeca4b84fae927cc58ff1f48,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.0164
-      objectReference: {fileID: 0}
-    - target: {fileID: 6109286818629308506, guid: d9aa38eafeca4b84fae927cc58ff1f48,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.0134
-      objectReference: {fileID: 0}
-    - target: {fileID: 6109286818629308506, guid: d9aa38eafeca4b84fae927cc58ff1f48,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.0606
-      objectReference: {fileID: 0}
     - target: {fileID: 6571267966830873218, guid: d9aa38eafeca4b84fae927cc58ff1f48,
         type: 3}
       propertyPath: m_Enabled
@@ -11917,11 +11852,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_InteractionManager
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7528059190334856447, guid: d9aa38eafeca4b84fae927cc58ff1f48,
-        type: 3}
-      propertyPath: m_HideControllerOnSelect
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7630970684669155683, guid: d9aa38eafeca4b84fae927cc58ff1f48,
         type: 3}
@@ -11973,21 +11903,6 @@ PrefabInstance:
       propertyPath: m_LocomotionProvider
       value: 
       objectReference: {fileID: 912917166}
-    - target: {fileID: 8446483050999395395, guid: d9aa38eafeca4b84fae927cc58ff1f48,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.0108
-      objectReference: {fileID: 0}
-    - target: {fileID: 8446483050999395395, guid: d9aa38eafeca4b84fae927cc58ff1f48,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.0168
-      objectReference: {fileID: 0}
-    - target: {fileID: 8446483050999395395, guid: d9aa38eafeca4b84fae927cc58ff1f48,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.0602
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
