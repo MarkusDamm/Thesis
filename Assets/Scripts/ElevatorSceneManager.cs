@@ -19,20 +19,21 @@ public class ElevatorSceneManager : SceneManager
     void Update()
     {
         currentFloor = estimateFloor();
-        if (currentFloor != lastFloor)
+        Debug.Log("Current Floor: " + currentFloor + ".  Last Floor: " + lastFloor);
+        // if (currentFloor != lastFloor)
+        // {
+        if (!platformScript.canMove && platformScript.currentLevel != currentFloor)
         {
-            if (!platformScript.canMove && platformScript.currentLevel != currentFloor)
-            {
-                platformScript.MoveToLevel(currentFloor);
-            }
-
+            platformScript.MoveToLevel(currentFloor);
             lastFloor = currentFloor;
         }
+
+        // }
     }
 
     int estimateFloor()
     {
-        float currentHeigth = playerOrigin.transform.position.y;
+        float currentHeigth = mainCamera.transform.position.y;
         // bool floorIsEstimated = false;
         int floorNumber = -1;
         for (int i = 0; i < platformScript.points.Length; i++)
@@ -41,7 +42,7 @@ public class ElevatorSceneManager : SceneManager
             {
                 // floorIsEstimated = true;
                 floorNumber = i;
-                return floorNumber;
+                // return floorNumber;
             }
         }
         if (floorNumber < 0)
@@ -54,7 +55,8 @@ public class ElevatorSceneManager : SceneManager
 
     void setPlayerToFloor(int _floor)
     {
-        Vector3 playerPos = playerOrigin.transform.position;
-        playerOrigin.transform.position.Set(playerPos.x, platformScript.points[_floor].position.y + 1, playerPos.z);
+        Vector3 playerPos = mainCamera.transform.position;
+        // playerOrigin.transform.position.Set(playerPos.x, platformScript.points[_floor].position.y + 1, playerPos.z);
+        mainCamera.transform.Translate(0, platformScript.points[_floor].position.y - playerPos.y, 0);
     }
 }
