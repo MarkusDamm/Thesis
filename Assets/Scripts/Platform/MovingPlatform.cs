@@ -2,11 +2,13 @@ using UnityEngine;
 
 public class MovingPlatform : MonoBehaviour
 {
+    public bool usesInput;
     public bool canMove;
     [SerializeField] float speed;
     [SerializeField] int startPoint;
     [SerializeField] Transform[] points;
     [SerializeField] GameObject bars;
+    [SerializeField] GameObject[] buttons;
 
     int i;
     bool reverse;
@@ -16,6 +18,16 @@ public class MovingPlatform : MonoBehaviour
     {
         transform.position = points[startPoint].position;
         i = startPoint;
+
+        int n = 0;
+        foreach (var button in buttons)
+        {
+            if (n < points.Length - 1)
+            {
+                button.SetActive(usesInput);
+            }
+        }
+
     }
 
     // Update is called once per frame
@@ -48,4 +60,13 @@ public class MovingPlatform : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, points[i].position, speed * Time.deltaTime);
         }
     }
+
+    public void MoveToLevel(int _level)
+    {
+        i = _level;
+        canMove = true;
+        bars.SetActive(true);
+    }
+
+
 }

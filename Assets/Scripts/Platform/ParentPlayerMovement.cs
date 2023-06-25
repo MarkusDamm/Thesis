@@ -5,6 +5,7 @@ public class ParentPlayerMovement : MonoBehaviour
     Transform playerTransform;
     MovingPlatform platform;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,25 +15,42 @@ public class ParentPlayerMovement : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         Debug.Log("collision with " + collision);
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player" && !platform.usesInput)
         {
             playerTransform = collision.transform.parent.parent;
-            playerTransform.SetParent(transform);
+            ParentPlayer(true);
+            // playerTransform.SetParent(transform);
+
             // collision.transform.parent.parent.SetParent(transform);
             // collision.transform.SetParent(transform);
         }
     }
 
-    private void OnCollisionExit(Collision collision)
+    public void ParentPlayer(bool isTrue)
     {
-        if (collision.gameObject.tag == "Player")
+        if (isTrue)
+            playerTransform.SetParent(transform);
+
+        else
         {
             playerTransform.SetParent(null);
+            platform.canMove = false;
+        }
+
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.tag == "Player" /* && !platform.usesInput */ )
+        {
+            ParentPlayer(false);
+            // playerTransform.SetParent(null);
+
             // playerTransform = null;
             // collision.transform.parent.parent.SetParent(null);
             // collision.transform.SetParent(null);
 
-            platform.canMove = false;
+            // platform.canMove = false;
         }
     }
 }

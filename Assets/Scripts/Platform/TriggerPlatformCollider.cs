@@ -9,12 +9,18 @@ public class TriggerPlatformCollider : MonoBehaviour
     void Start()
     {
         platform = GetComponent<MovingPlatform>();
+        if (platform.usesInput)
+        {
+            this.enabled = false;
+        }
     }
 
     private void OnTriggerEnter(Collider collider)
     {
-        Debug.Log("triggered by " + collider);
-        platform.canMove = true;
-        bars.SetActive(true);
+        if (!platform.usesInput)
+        {
+            platform.canMove = true;
+            bars.SetActive(true);
+        }
     }
 }
