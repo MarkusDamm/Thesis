@@ -81,7 +81,7 @@ GameObject:
   - component: {fileID: 4586750781376675881}
   - component: {fileID: 5989356118153829186}
   - component: {fileID: 4863361900137749607}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -191,9 +191,7 @@ MonoBehaviour:
   canMove: 0
   speed: 0.2
   startPoint: 0
-  points:
-  - {fileID: 2783958341134055842}
-  - {fileID: 4445357369148227607}
+  m_points: []
   bars: {fileID: 9009959382301918975}
   buttons: []
 --- !u!114 &4586750781376675881

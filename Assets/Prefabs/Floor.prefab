@@ -227,7 +227,7 @@ GameObject:
   - component: {fileID: 3928248952880865521}
   - component: {fileID: 3857491903683194207}
   - component: {fileID: 8256307848802291698}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Ground-Box
   m_TagString: Untagged
   m_Icon: {fileID: 0}
