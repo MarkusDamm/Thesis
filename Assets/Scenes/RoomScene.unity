@@ -5064,6 +5064,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PerlerMachineSetup
       objectReference: {fileID: 0}
+    - target: {fileID: 7427099217759664756, guid: c3014b24b7f247b478b4058c9339acb8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7441162158073990273, guid: c3014b24b7f247b478b4058c9339acb8,
         type: 3}
       propertyPath: m_LocalPosition.x
