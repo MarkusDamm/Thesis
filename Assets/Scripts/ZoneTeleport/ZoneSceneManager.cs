@@ -90,6 +90,6 @@ public class ZoneSceneManager : SceneManager
             return;
         }
         TeleportationTarget.SetActive(true);
-        TeleportationTarget.transform.position = TargetedZone.zoneTransf.position + PositionOffset;
+        TeleportationTarget.transform.position = TargetedZone.transform.position + PositionOffset + mainCamera.transform.localPosition;
     }
 }

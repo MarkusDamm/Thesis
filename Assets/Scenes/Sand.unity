@@ -1088,11 +1088,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42c0b5d05274aa945ab7a562ef0fcef0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zoneTransf: {fileID: 969229944}
-  East: {fileID: 0}
-  West: {fileID: 989795241}
-  North: {fileID: 0}
-  South: {fileID: 0}
+  m_North: {fileID: 0}
+  m_NorthAudio: {fileID: 0}
+  m_NorthDistance: 0
+  m_East: {fileID: 0}
+  m_EastAudio: {fileID: 0}
+  m_EastDistance: 0
+  m_South: {fileID: 0}
+  m_SouthAudio: {fileID: 0}
+  m_SouthDistance: 0
+  m_West: {fileID: 989795241}
+  m_WestAudio: {fileID: 0}
+  m_WestDistance: 0
 --- !u!1001 &989795238
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1200,11 +1207,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42c0b5d05274aa945ab7a562ef0fcef0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zoneTransf: {fileID: 989795239}
-  East: {fileID: 969229946}
-  West: {fileID: 1750455536}
-  North: {fileID: 0}
-  South: {fileID: 0}
+  m_North: {fileID: 0}
+  m_NorthAudio: {fileID: 0}
+  m_NorthDistance: 0
+  m_East: {fileID: 969229946}
+  m_EastAudio: {fileID: 0}
+  m_EastDistance: 0
+  m_South: {fileID: 0}
+  m_SouthAudio: {fileID: 0}
+  m_SouthDistance: 0
+  m_West: {fileID: 1750455536}
+  m_WestAudio: {fileID: 0}
+  m_WestDistance: 0
 --- !u!1 &1049787885
 GameObject:
   m_ObjectHideFlags: 0
@@ -2281,11 +2295,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42c0b5d05274aa945ab7a562ef0fcef0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zoneTransf: {fileID: 1750455534}
-  East: {fileID: 989795241}
-  West: {fileID: 0}
-  North: {fileID: 0}
-  South: {fileID: 0}
+  m_North: {fileID: 0}
+  m_NorthAudio: {fileID: 0}
+  m_NorthDistance: 0
+  m_East: {fileID: 989795241}
+  m_EastAudio: {fileID: 0}
+  m_EastDistance: 0
+  m_South: {fileID: 0}
+  m_SouthAudio: {fileID: 0}
+  m_SouthDistance: 0
+  m_West: {fileID: 0}
+  m_WestAudio: {fileID: 0}
+  m_WestDistance: 0
 --- !u!1 &1869313608
 GameObject:
   m_ObjectHideFlags: 0
