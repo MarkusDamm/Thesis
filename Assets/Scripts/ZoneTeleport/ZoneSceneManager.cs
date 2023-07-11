@@ -29,8 +29,9 @@ public class ZoneSceneManager : SceneManager
         float triggerLeft = activateValueInteractionLeft.action.ReadValue<float>();
         float triggerRight = activateValueInteractionRight.action.ReadValue<float>();
 
-        if (triggerLeft > 0.1f || triggerRight > 0.1f)
+        if ((triggerLeft > 0.1f || triggerRight > 0.1f) && canTeleport)
         {
+            Debug.Log("triggerLeft: " + triggerLeft + "; triggerRight: " + triggerRight);
             prepareTeleport();
 
             if (triggerLeft > 0.99f || triggerRight > 0.99f)
@@ -55,12 +56,10 @@ public class ZoneSceneManager : SceneManager
     {
         // playerOrigin.transform.position = _zone.zoneTransf.position + PositionOffset;
         Vector3 playerPos = playerOrigin.transform.position;
-        Debug.Log("PlayerPos: " + playerPos);
         Vector3 ZonePos = _zone.transform.position;
-        Debug.Log("ZonePos: " + ZonePos);
-        Debug.Log("Offset: " + PositionOffset);
         playerOrigin.transform.Translate(-playerPos + ZonePos + PositionOffset);
         canTeleport = false;
+        CurrentZone = _zone;
         Invoke("enableTeleport", ZoneSceneManager.teleportationCooldown);
     }
 
@@ -74,13 +73,13 @@ public class ZoneSceneManager : SceneManager
         float yRotation = mainCamera.transform.eulerAngles.y;
         TargetedZone = null;
 
-        if (yRotation < 45 && yRotation > -45)
+        if (yRotation < 45 && (yRotation > -45 || yRotation > 315))
         { TargetedZone = CurrentZone.North; }
         else if (yRotation < 135 && yRotation >= 45)
         { TargetedZone = CurrentZone.East; }
         else if ((yRotation < 225 || yRotation < -135) && yRotation >= 135)
         { TargetedZone = CurrentZone.South; }
-        else if (yRotation < -45 && (yRotation >= 225 || yRotation >= -135))
+        else if ((yRotation < -45 || yRotation < 315) && (yRotation >= 225 || yRotation >= -135))
         { TargetedZone = CurrentZone.West; }
     }
 
