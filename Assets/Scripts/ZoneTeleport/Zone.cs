@@ -1,9 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Zone : MonoBehaviour
 {
+    public bool hasOnEnter;
+    public UnityEvent onEnter;
+    public bool hasOnExit;
+    public UnityEvent onExit;
     [Header("North")]
     [SerializeField] Zone m_North;
     [SerializeField] AudioClip m_NorthAudio;

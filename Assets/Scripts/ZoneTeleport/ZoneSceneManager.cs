@@ -10,6 +10,7 @@ public class ZoneSceneManager : SceneManager
 
     [SerializeField] Zone StartZone;
     [SerializeField] Vector3 PositionOffset;
+    Quaternion baseRotation;
     [SerializeField] GameObject TeleportationTarget;
     Zone CurrentZone;
     Zone TargetedZone;
@@ -18,8 +19,9 @@ public class ZoneSceneManager : SceneManager
 
     private void Awake()
     {
-        teleport(StartZone);
+        baseRotation = playerOrigin.transform.localRotation;
         CurrentZone = StartZone;
+        teleport(StartZone);
         canTeleport = true;
         TeleportationTarget.SetActive(false);
     }
@@ -31,7 +33,6 @@ public class ZoneSceneManager : SceneManager
 
         if ((triggerLeft > 0.1f || triggerRight > 0.1f) && canTeleport)
         {
-            Debug.Log("triggerLeft: " + triggerLeft + "; triggerRight: " + triggerRight);
             prepareTeleport();
 
             if (triggerLeft > 0.99f || triggerRight > 0.99f)
@@ -54,12 +55,18 @@ public class ZoneSceneManager : SceneManager
 
     private void teleport(Zone _zone)
     {
-        // playerOrigin.transform.position = _zone.zoneTransf.position + PositionOffset;
-        Vector3 playerPos = playerOrigin.transform.position;
-        Vector3 ZonePos = _zone.transform.position;
-        playerOrigin.transform.Translate(-playerPos + ZonePos + PositionOffset);
-        canTeleport = false;
+        playerOrigin.transform.SetParent(_zone.transform);
+        playerOrigin.transform.SetLocalPositionAndRotation(PositionOffset, baseRotation);
+        if (CurrentZone.hasOnExit)
+        {
+            CurrentZone.onExit.Invoke();
+        }
         CurrentZone = _zone;
+        if (CurrentZone.hasOnEnter)
+        {
+            CurrentZone.onEnter.Invoke();
+        }
+        canTeleport = false;
         Invoke("enableTeleport", ZoneSceneManager.teleportationCooldown);
     }
 
