@@ -1,19 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Portal : SceneManager
+public class Portal : MonoBehaviour
 {
-    public Transform avatar;
+    public PortalSceneManager portalSceneManager;
     public Zone portalTarget;
-    [SerializeField] Vector3 PositionOffset = new(-0.75f, 0, 0.05f);
-
-    private Quaternion baseRotation;
     private bool avatarIsOverlapping = false;
 
-    private void Awake()
+    private void Start()
     {
-        baseRotation = playerOrigin.transform.localRotation;
+        if (!portalSceneManager)
+        {
+            portalSceneManager = GameObject.Find("SzeneManager").GetComponent<PortalSceneManager>();
+        }
+        if (!portalSceneManager)
+        {
+            portalSceneManager = GameObject.Find("SceneManager").GetComponent<PortalSceneManager>();
+        }
     }
 
     // Update is called once per frame
@@ -21,21 +23,15 @@ public class Portal : SceneManager
     {
         if (avatarIsOverlapping)
         {
-            Vector3 portalToAvatar = avatar.position - transform.position;
+            Vector3 portalToAvatar = portalSceneManager.avatar.position - transform.position;
             float dotProduct = Vector3.Dot(transform.up, portalToAvatar);
 
             Debug.Log(dotProduct);
             if (dotProduct < 0f)
             {
-                teleport(portalTarget);
+                portalSceneManager.Teleport(portalTarget);
             }
         }
-    }
-
-    private void teleport(Zone _zone)
-    {
-        playerOrigin.transform.SetParent(_zone.transform);
-        playerOrigin.transform.SetLocalPositionAndRotation(PositionOffset, baseRotation);
     }
 
     private void OnTriggerEnter(Collider other)
