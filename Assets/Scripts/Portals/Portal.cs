@@ -26,7 +26,6 @@ public class Portal : MonoBehaviour
             Vector3 portalToAvatar = portalSceneManager.avatar.position - transform.position;
             float dotProduct = Vector3.Dot(transform.up, portalToAvatar);
 
-            Debug.Log(dotProduct);
             if (dotProduct < 0f)
             {
                 portalSceneManager.Teleport(portalTarget);
