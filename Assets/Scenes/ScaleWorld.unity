@@ -2608,7 +2608,7 @@ MonoBehaviour:
       m_Flags: 0
     m_Reference: {fileID: 7904272356298805229, guid: c348712bda248c246b8c49b3db54643f,
       type: 3}
-  StartZone: {fileID: 290213899}
+  StartZone: {fileID: 989795241}
   PositionOffset: {x: -0.75, y: 0, z: 0.05}
   TeleportationTarget: {fileID: 621900407}
 --- !u!4 &1516443320
@@ -2634,7 +2634,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1516443318}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 98db4304bb2aa624780eab6583901d28, type: 3}
   m_Name: 
