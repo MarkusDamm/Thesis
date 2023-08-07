@@ -7,12 +7,12 @@ Shader "Unlit/ScreenCutOut"
     SubShader
     {
         Tags{ "Queue" = "Transparent" "IgnoreProjector" = "True" "RenderType" = "Transparent" }
-		Lighting Off
-		Cull Back
-		ZWrite On
-		ZTest Less
-		
-		Fog{ Mode Off }
+        Lighting Off
+        Cull Back
+        ZWrite On
+        ZTest Less
+        
+        Fog{ Mode Off }
 
         Pass
         {
