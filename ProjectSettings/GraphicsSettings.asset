@@ -67,6 +67,8 @@ GraphicsSettings:
   m_DefaultRenderingLayerMask: 1
   m_LogWhenShaderIsCompiled: 0
   m_SRPDefaultSettings:
+    UnityEngine.Rendering.HighDefinition.HDRenderPipeline: {fileID: 11400000, guid: b7594977ad54ea541840f0732bcfa9ad,
+      type: 2}
     UnityEngine.Rendering.Universal.UniversalRenderPipeline: {fileID: 11400000, guid: 333ec60a5c8cc8b41b579f524e979b5f,
       type: 2}
   m_LightProbeOutsideHullStrategy: 0
