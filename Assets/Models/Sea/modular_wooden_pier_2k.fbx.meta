@@ -3,7 +3,17 @@ guid: bdcb558e3015a194cba26af3a83ec904
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: modular_wooden_pier_planks
+    second: {fileID: 2100000, guid: 3f469dd2be3e3a84db07693e8914c162, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: modular_wooden_pier_poles
+    second: {fileID: 2100000, guid: 8e9588b9d0f274949b04ac1f6db6dd63, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
