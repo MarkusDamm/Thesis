@@ -110,21 +110,21 @@ Material:
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
     - _Fuzziness: 1
-    - _Fuzziness1: 1
-    - _Fuzziness2: 1.06
+    - _Fuzziness1: 1.07
+    - _Fuzziness2: 0.94
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Metallic: 0
-    - _NoiseScale: 100
-    - _NoiseScale2: 44
+    - _NoiseScale: 210
+    - _NoiseScale2: 90
     - _OcclusionStrength: 1
     - _Parallax: 0.005
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Range: 1
-    - _Range1: 0.5
-    - _Range2: 0.6
+    - _Range1: 0.83
+    - _Range2: 0
     - _ReceiveShadows: 1
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
@@ -136,8 +136,8 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BackgroundColor: {r: 0.5849056, g: 0.40711638, b: 0.09104664, a: 0}
-    - _BaseColor: {r: 0.5849056, g: 0.039143156, b: 0.0027589954, a: 1}
+    - _BackgroundColor: {r: 0.5294118, g: 0.33625096, b: 0.2, a: 0}
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
