@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using OpenCover.Framework.Model;
 using Unity.PlasticSCM.Editor.WebApi;
 using UnityEngine;
 
@@ -8,15 +9,11 @@ public class ThemeManager : MonoBehaviour
     public Theme[] themes;
     [Range(0, 5)]
     public int activeTheme;
-    public Transform rotatingFloorParent;   // use coroutine for rotating, subscribe rotating floor to coroutine 
+    [Range(1, 5)]
+    public int themeChangeDuration = 3;
+    public Transform rotatingFloorParent;
 
     private bool isChangingTheme = false;
-
-    // Start is called before the first frame update
-    // void Start()
-    // {
-    // Maybe for checking the first Theme
-    // }
 
     public bool IsThemeActive(Theme _thisTheme)
     {
@@ -32,26 +29,74 @@ public class ThemeManager : MonoBehaviour
         if (_newTheme.title == themes[activeTheme].title || isChangingTheme) return;
         isChangingTheme = true;
         Theme oldTheme = themes[activeTheme];
-        oldTheme.OnThemeChange();
 
         for (int i = 0; i < themes.Length; i++)
         {
+            if (themes[i].title == oldTheme.title)
+                themes[i].OnThemeChange();
+
             if (_newTheme == themes[i])
             {
                 activeTheme = i;
+                break;
             }
         }
-
         _newTheme.OnThemeChange();
+        // determineGroundRotation(oldTheme, themes[activeTheme]);
+    }
+    /***
+    / Can change multiple Themes
+    ***/
+    public void ChangeTheme(string _newThemeTitle)
+    {
+        if (_newThemeTitle == themes[activeTheme].title || isChangingTheme) return;
+        isChangingTheme = true;
+        Theme oldTheme = themes[activeTheme];
+
+        int newTheme = 0;
+        for (int i = 0; i < themes.Length; i++)
+        {
+            if (themes[i].title == oldTheme.title)
+                themes[i].OnThemeChange();
+
+            if (_newThemeTitle == themes[i].title)
+            {
+                newTheme = i;
+                themes[i].OnThemeChange();
+            }
+        }
+        activeTheme = newTheme;
+        // determineGroundRotation(oldTheme, themes[activeTheme]);
     }
     public void ChangeTheme(int _newThemeInt)
     {
         if (_newThemeInt == activeTheme || isChangingTheme) return;
         isChangingTheme = true;
         Theme oldTheme = themes[activeTheme];
-        oldTheme.OnThemeChange();
 
+        for (int i = 0; i < themes.Length; i++)
+        {
+            if (themes[i].title == oldTheme.title)
+                themes[i].OnThemeChange();
+        }
         themes[_newThemeInt].OnThemeChange();
         activeTheme = _newThemeInt;
+        // determineGroundRotation(oldTheme, themes[activeTheme]);
+    }
+
+    private void determineGroundRotation(Theme _oldTheme, Theme _newTheme)
+    {
+        if (_oldTheme is ThemeRotating oldTheme)
+        {
+            Debug.Log("Old Theme Rotates");
+            // StartCoroutine(oldTheme.rotateFloor(rotatingFloorParent));
+            oldTheme.handleGroundRotation();
+        }
+        else if (_newTheme is ThemeRotating newTheme)
+        {
+            Debug.Log("New Theme Rotates");
+            // StartCoroutine(newTheme.rotateFloor(rotatingFloorParent));
+            newTheme.handleGroundRotation();
+        }
     }
 }

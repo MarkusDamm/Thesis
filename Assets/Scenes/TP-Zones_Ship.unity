@@ -4869,7 +4869,7 @@ MonoBehaviour:
     m_Reference: {fileID: 7904272356298805229, guid: c348712bda248c246b8c49b3db54643f,
       type: 3}
   StartZone: {fileID: 989795241}
-  PositionOffset: {x: 0.103, y: 0, z: -0.152}
+  PositionOffset: {x: 0.08, y: 0, z: -0.3}
   TeleportationTarget: {fileID: 621900407}
 --- !u!4 &1516443320
 Transform:

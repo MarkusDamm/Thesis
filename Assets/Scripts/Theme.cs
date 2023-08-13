@@ -1,10 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Theme : MonoBehaviour
+public enum ThemeChangeMethod
+{
+    Rotation, Translation
+}
+public abstract class Theme : MonoBehaviour
 {
     public string title;
+    public ThemeChangeMethod themeChangeMethod;
 
     public ThemeManager themeManager;
     public Transform groundedObjectParent;
@@ -12,62 +15,13 @@ public class Theme : MonoBehaviour
     public Transform wallsParent;
     public bool isThemeActive = false;
 
-    private bool isThemechangeActive = false;
-    private Vector3 currentForward;
-    private Vector3 reverseForward;
-
-    private void Update()
+    public virtual void OnThemeChange()
     {
-        if (isThemechangeActive)
-        {
-            GetCurrentForward();
-            if (currentForward != reverseForward)
-            {
-                if (groundedObjectParent != null)
-                    RotateObjects(groundedObjectParent, Vector3.right);
-
-                if (walledObjectParent != null)
-                    RotateObjects(walledObjectParent, Vector3.up);
-
-                if (wallsParent != null)
-                    RotateObjects(wallsParent, Vector3.up);
-            }
-            else
-            {
-                isThemeActive = themeManager.IsThemeActive(this);
-                Debug.Log(title + "is active? " + isThemeActive);
-                handleColliders(isThemeActive);
-                isThemechangeActive = false;
-            }
-        }
+        ActivateObjects(true);
+        HandleColliders(false);
     }
 
-    public void OnThemeChange()
-    {
-        GetCurrentForward();
-        reverseForward = -currentForward;
-
-        handleColliders(false);
-        isThemechangeActive = true;
-    }
-
-    private void GetCurrentForward()
-    {
-        if (groundedObjectParent != null)
-        {
-            currentForward = groundedObjectParent.GetChild(0).forward;
-        }
-        else if (walledObjectParent != null)
-        {
-            currentForward = walledObjectParent.GetChild(0).forward;
-        }
-        else
-        {
-            currentForward = wallsParent.GetChild(0).forward;
-        }
-
-    }
-    private void handleColliders(bool _activate)
+    protected void HandleColliders(bool _activate)
     {
         if (groundedObjectParent != null)
             ActivateColliders(groundedObjectParent, _activate);
@@ -78,15 +32,7 @@ public class Theme : MonoBehaviour
         if (wallsParent != null)
             ActivateColliders(wallsParent, _activate);
     }
-    private void RotateObjects(Transform _parentTransform, Vector3 _direction)
-    {
-        foreach (Transform transform in _parentTransform)
-        {
-            transform.Rotate(_direction, Space.World);
-        }
-    }
-
-    private void ActivateColliders(Transform _parentTransform, bool _activate)
+    protected void ActivateColliders(Transform _parentTransform, bool _activate)
     {
         foreach (Transform transform in _parentTransform)
         {
@@ -97,4 +43,16 @@ public class Theme : MonoBehaviour
             }
         }
     }
+    protected void ActivateObjects(bool _activate)
+    {
+        if (groundedObjectParent != null)
+            groundedObjectParent.gameObject.SetActive(_activate);
+
+        if (walledObjectParent != null)
+            walledObjectParent.gameObject.SetActive(_activate);
+
+        if (wallsParent != null)
+            wallsParent.gameObject.SetActive(_activate);
+    }
+
 }
