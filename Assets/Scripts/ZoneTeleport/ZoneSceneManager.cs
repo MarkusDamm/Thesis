@@ -1,20 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
+using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering.HighDefinition;
+using UnityEngine.UI;
+// using UnityEngine.UIElements;
 
 public class ZoneSceneManager : SceneManager
 {
+    [SerializeField] private AudioManager audioManager;
     [SerializeField] private InputActionProperty activateValueInteractionLeft;
     [SerializeField] private InputActionProperty activateValueInteractionRight;
+
+    [SerializeField] Canvas fadingCanvas;
 
     [SerializeField] Zone StartZone;
     [SerializeField] Vector3 PositionOffset;
     Quaternion baseRotation;
     [SerializeField] GameObject TeleportationTarget;
     Zone CurrentZone;
-    Zone TargetedZone;
+    float viewingDirection;
+    ZoneProperties TargetedZonesProperty;
     bool canTeleport;
+    [SerializeField][Range(0.5f, 3f)] float teleportFadeDuration = 1f;
     static float teleportationCooldown = 3f;
 
     private void Awake()
@@ -24,6 +33,17 @@ public class ZoneSceneManager : SceneManager
         teleport(StartZone);
         canTeleport = true;
         TeleportationTarget.SetActive(false);
+
+        if (!fadingCanvas)
+        {
+            fadingCanvas = transform.GetComponentInChildren<Canvas>();
+        }
+        if (!audioManager)
+        {
+            audioManager = transform.GetComponent<AudioManager>();
+        }
+
+
     }
 
     private void Update()
@@ -37,7 +57,12 @@ public class ZoneSceneManager : SceneManager
 
             if (triggerLeft > 0.99f || triggerRight > 0.99f)
             {
-                teleport(TargetedZone);
+                // audioManager.PlaySoundOnSource(TargetedZonesProperty.audioClip, CurrentZone.audioSource);
+                CurrentZone.audioSource.PlayOneShot(TargetedZonesProperty.audioClip);
+                Debug.Log("Teleport Player");
+                canTeleport = false;
+                Invoke("enableTeleport", ZoneSceneManager.teleportationCooldown);
+                StartCoroutine(Teleport());
             }
         }
         else
@@ -70,6 +95,60 @@ public class ZoneSceneManager : SceneManager
         Invoke("enableTeleport", ZoneSceneManager.teleportationCooldown);
     }
 
+    private IEnumerator Teleport()
+    {
+        // Play sound
+        // CurrentZone.audioSource.PlayOneShot(TargetedZonesProperty.audioClip);
+        // Debug.Log("Play Sound from " + _zoneProperties.targetZone);
+
+        // Fade to Black
+        UnityEngine.UI.Image fadingImage = fadingCanvas.GetComponentInChildren<UnityEngine.UI.Image>();
+        float faderSequenceDuration = teleportFadeDuration / 3f;
+        float fadingValuePerFrame = 1f / (60 * faderSequenceDuration);
+        float fadingValue = 0f;
+        Debug.Log("FaderSequenceDuration is " + faderSequenceDuration);
+        for (int i = 0; i < (faderSequenceDuration * 60f); i++)
+        {
+            fadingValue += fadingValuePerFrame;
+            SetFadeColorAlpha(fadingImage, fadingValue);
+            yield return new WaitForFixedUpdate();
+        }
+        SetFadeColorAlpha(fadingImage, 1);
+        Debug.Log("FadeColor is Black");
+
+        // Teleport
+        playerOrigin.transform.SetParent(TargetedZonesProperty.targetZone.transform);
+        playerOrigin.transform.SetLocalPositionAndRotation(PositionOffset, baseRotation);
+        if (CurrentZone.hasOnExit)
+        {
+            CurrentZone.onExit.Invoke();
+        }
+        CurrentZone = TargetedZonesProperty.targetZone;
+        if (CurrentZone.hasOnEnter)
+        {
+            CurrentZone.onEnter.Invoke();
+        }
+
+        Debug.Log("Wait for Seconds");
+        yield return new WaitForSeconds(faderSequenceDuration);
+        Debug.Log("Wait over");
+        // Fade Back
+        for (int j = 0; j < faderSequenceDuration * 60f; j++)
+        {
+            fadingValue -= fadingValuePerFrame;
+            SetFadeColorAlpha(fadingImage, fadingValue);
+            yield return new WaitForFixedUpdate();
+        }
+        SetFadeColorAlpha(fadingImage, 0);
+    }
+
+    private void SetFadeColorAlpha(UnityEngine.UI.Image _image, float _alphaValue)
+    {
+        Color fadeColor = _image.color;
+        fadeColor.a = _alphaValue;
+        _image.color = fadeColor;
+    }
+
     private void enableTeleport()
     {
         canTeleport = true;
@@ -77,26 +156,29 @@ public class ZoneSceneManager : SceneManager
 
     private void calculateViewingDirection()
     {
-        float yRotation = mainCamera.transform.eulerAngles.y;
-        TargetedZone = null;
+        viewingDirection = mainCamera.transform.eulerAngles.y;
 
-        if (yRotation < 45 && (yRotation > -45 || yRotation > 315))
-        { TargetedZone = CurrentZone.North; }
-        else if (yRotation < 135 && yRotation >= 45)
-        { TargetedZone = CurrentZone.East; }
-        else if ((yRotation < 225 || yRotation < -135) && yRotation >= 135)
-        { TargetedZone = CurrentZone.South; }
-        else if ((yRotation < -45 || yRotation < 315) && (yRotation >= 225 || yRotation >= -135))
-        { TargetedZone = CurrentZone.West; }
+        TargetedZonesProperty = null;
+        foreach (ZoneProperties zoneProperties in CurrentZone.connectingZones)
+        {
+            if (viewingDirection < zoneProperties.maxYRotation && viewingDirection > zoneProperties.minYRotation)
+            {
+                TargetedZonesProperty = zoneProperties;
+                // Debug.Log("Targetet Zone is " + TargetedZonesProperty.targetZone);
+                return;
+            }
+        }
+
     }
 
     private void displayTeleportTarget()
     {
-        if (TargetedZone == null)
+        if (TargetedZonesProperty == null)
         {
             return;
         }
         TeleportationTarget.SetActive(true);
-        TeleportationTarget.transform.position = TargetedZone.transform.position + PositionOffset + mainCamera.transform.localPosition;
+        TeleportationTarget.transform.position = TargetedZonesProperty.targetZone.transform.position + mainCamera.transform.localPosition + Vector3.down;
+        //+ PositionOffset
     }
 }

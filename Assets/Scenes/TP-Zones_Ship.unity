@@ -332,6 +332,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 173653928}
   m_Mesh: {fileID: -2438212404504904744, guid: bdcb558e3015a194cba26af3a83ec904, type: 3}
+--- !u!82 &209885902 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 7746650168539348711, guid: bda596476b82d5f449e4df18d7b91599,
+    type: 3}
+  m_PrefabInstance: {fileID: 476161181}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &222124920
 GameObject:
   m_ObjectHideFlags: 0
@@ -902,6 +908,7 @@ MonoBehaviour:
   - {fileID: 1814582541}
   - {fileID: 617875701}
   speedModifier: 0.05
+  routBreaks: 
 --- !u!1001 &444055592
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1017,18 +1024,8 @@ MonoBehaviour:
   onExit:
     m_PersistentCalls:
       m_Calls: []
-  m_North: {fileID: 523897524}
-  m_NorthAudio: {fileID: 0}
-  m_NorthDistance: 0
-  m_East: {fileID: 0}
-  m_EastAudio: {fileID: 0}
-  m_EastDistance: 0
-  m_South: {fileID: 0}
-  m_SouthAudio: {fileID: 0}
-  m_SouthDistance: 0
-  m_West: {fileID: 0}
-  m_WestAudio: {fileID: 0}
-  m_WestDistance: 0
+  audioSource: {fileID: 0}
+  connectingZones: []
 --- !u!1 &457138026
 GameObject:
   m_ObjectHideFlags: 0
@@ -1222,18 +1219,20 @@ MonoBehaviour:
   onExit:
     m_PersistentCalls:
       m_Calls: []
-  m_North: {fileID: 1078553102}
-  m_NorthAudio: {fileID: 0}
-  m_NorthDistance: 0
-  m_East: {fileID: 0}
-  m_EastAudio: {fileID: 0}
-  m_EastDistance: 0
-  m_South: {fileID: 0}
-  m_SouthAudio: {fileID: 0}
-  m_SouthDistance: 0
-  m_West: {fileID: 1843811709}
-  m_WestAudio: {fileID: 0}
-  m_WestDistance: 0
+  audioSource: {fileID: 209885902}
+  connectingZones:
+  - targetZone: {fileID: 1078553102}
+    audioClip: {fileID: 8300000, guid: 5284306b9b8fb494082d1ed87cb3be22, type: 3}
+    distance: 0
+    minYRotation: 0
+    maxYRotation: 0
+    angleSpan: 50
+  - targetZone: {fileID: 1843811709}
+    audioClip: {fileID: 8300000, guid: 5284306b9b8fb494082d1ed87cb3be22, type: 3}
+    distance: 0
+    minYRotation: 0
+    maxYRotation: 0
+    angleSpan: 50
 --- !u!1 &481703744
 GameObject:
   m_ObjectHideFlags: 0
@@ -1507,18 +1506,20 @@ MonoBehaviour:
   onExit:
     m_PersistentCalls:
       m_Calls: []
-  m_North: {fileID: 1520657202}
-  m_NorthAudio: {fileID: 0}
-  m_NorthDistance: 0
-  m_East: {fileID: 1535930964}
-  m_EastAudio: {fileID: 0}
-  m_EastDistance: 0
-  m_South: {fileID: 444055595}
-  m_SouthAudio: {fileID: 0}
-  m_SouthDistance: 0
-  m_West: {fileID: 0}
-  m_WestAudio: {fileID: 0}
-  m_WestDistance: 0
+  audioSource: {fileID: 0}
+  connectingZones:
+  - targetZone: {fileID: 1520657202}
+    audioClip: {fileID: 8300000, guid: 5284306b9b8fb494082d1ed87cb3be22, type: 3}
+    distance: 0
+    minYRotation: 0
+    maxYRotation: 0
+    angleSpan: 0
+  - targetZone: {fileID: 444055595}
+    audioClip: {fileID: 8300000, guid: 5284306b9b8fb494082d1ed87cb3be22, type: 3}
+    distance: 0
+    minYRotation: 0
+    maxYRotation: 0
+    angleSpan: 0
 --- !u!1 &525482195
 GameObject:
   m_ObjectHideFlags: 0
@@ -1876,6 +1877,109 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 711150217}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &759330650
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 759330651}
+  - component: {fileID: 759330654}
+  - component: {fileID: 759330653}
+  - component: {fileID: 759330652}
+  m_Layer: 5
+  m_Name: Canvas
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &759330651
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 759330650}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1770765114}
+  m_Father: {fileID: 1516443320}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0, y: 0}
+--- !u!114 &759330652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 759330650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!114 &759330653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 759330650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_UiScaleMode: 0
+  m_ReferencePixelsPerUnit: 100
+  m_ScaleFactor: 1
+  m_ReferenceResolution: {x: 800, y: 600}
+  m_ScreenMatchMode: 0
+  m_MatchWidthOrHeight: 0
+  m_PhysicalUnit: 3
+  m_FallbackScreenDPI: 96
+  m_DefaultSpriteDPI: 96
+  m_DynamicPixelsPerUnit: 1
+  m_PresetInfoIsWorld: 0
+--- !u!223 &759330654
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 759330650}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 1
+  m_Camera: {fileID: 848133943}
+  m_PlaneDistance: 0.1
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 1
+  m_AdditionalShaderChannelsFlag: 7
+  m_UpdateRectTransformForStandalone: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 999
+  m_TargetDisplay: 0
 --- !u!1 &804076770
 GameObject:
   m_ObjectHideFlags: 0
@@ -2725,18 +2829,20 @@ MonoBehaviour:
   onExit:
     m_PersistentCalls:
       m_Calls: []
-  m_North: {fileID: 0}
-  m_NorthAudio: {fileID: 0}
-  m_NorthDistance: 0
-  m_East: {fileID: 0}
-  m_EastAudio: {fileID: 0}
-  m_EastDistance: 0
-  m_South: {fileID: 1078553102}
-  m_SouthAudio: {fileID: 0}
-  m_SouthDistance: 0
-  m_West: {fileID: 989795241}
-  m_WestAudio: {fileID: 0}
-  m_WestDistance: 0
+  audioSource: {fileID: 0}
+  connectingZones:
+  - targetZone: {fileID: 989795241}
+    audioClip: {fileID: 8300000, guid: 5284306b9b8fb494082d1ed87cb3be22, type: 3}
+    distance: 0
+    minYRotation: 0
+    maxYRotation: 0
+    angleSpan: 43.6
+  - targetZone: {fileID: 1078553102}
+    audioClip: {fileID: 8300000, guid: 5284306b9b8fb494082d1ed87cb3be22, type: 3}
+    distance: 0
+    minYRotation: 0
+    maxYRotation: 0
+    angleSpan: 39.7
 --- !u!1001 &989795238
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2860,18 +2966,20 @@ MonoBehaviour:
   onExit:
     m_PersistentCalls:
       m_Calls: []
-  m_North: {fileID: 0}
-  m_NorthAudio: {fileID: 0}
-  m_NorthDistance: 0
-  m_East: {fileID: 969229946}
-  m_EastAudio: {fileID: 0}
-  m_EastDistance: 0
-  m_South: {fileID: 0}
-  m_SouthAudio: {fileID: 0}
-  m_SouthDistance: 0
-  m_West: {fileID: 1750455536}
-  m_WestAudio: {fileID: 0}
-  m_WestDistance: 0
+  audioSource: {fileID: 0}
+  connectingZones:
+  - targetZone: {fileID: 1750455536}
+    audioClip: {fileID: 8300000, guid: 5284306b9b8fb494082d1ed87cb3be22, type: 3}
+    distance: 0
+    minYRotation: 0
+    maxYRotation: 0
+    angleSpan: 45
+  - targetZone: {fileID: 969229946}
+    audioClip: {fileID: 8300000, guid: 5284306b9b8fb494082d1ed87cb3be22, type: 3}
+    distance: 0
+    minYRotation: 0
+    maxYRotation: 0
+    angleSpan: 30
 --- !u!1 &1049787885
 GameObject:
   m_ObjectHideFlags: 0
@@ -3111,18 +3219,26 @@ MonoBehaviour:
   onExit:
     m_PersistentCalls:
       m_Calls: []
-  m_North: {fileID: 969229946}
-  m_NorthAudio: {fileID: 0}
-  m_NorthDistance: 0
-  m_East: {fileID: 969229946}
-  m_EastAudio: {fileID: 0}
-  m_EastDistance: 0
-  m_South: {fileID: 476161183}
-  m_SouthAudio: {fileID: 0}
-  m_SouthDistance: 0
-  m_West: {fileID: 1302324837}
-  m_WestAudio: {fileID: 0}
-  m_WestDistance: 0
+  audioSource: {fileID: 0}
+  connectingZones:
+  - targetZone: {fileID: 969229946}
+    audioClip: {fileID: 8300000, guid: 5284306b9b8fb494082d1ed87cb3be22, type: 3}
+    distance: 0
+    minYRotation: 0
+    maxYRotation: 0
+    angleSpan: 45
+  - targetZone: {fileID: 476161183}
+    audioClip: {fileID: 8300000, guid: 5284306b9b8fb494082d1ed87cb3be22, type: 3}
+    distance: 0
+    minYRotation: 0
+    maxYRotation: 0
+    angleSpan: 45
+  - targetZone: {fileID: 1302324837}
+    audioClip: {fileID: 8300000, guid: 5284306b9b8fb494082d1ed87cb3be22, type: 3}
+    distance: 0
+    minYRotation: 0
+    maxYRotation: 0
+    angleSpan: 45
 --- !u!1 &1138506786
 GameObject:
   m_ObjectHideFlags: 0
@@ -4372,18 +4488,8 @@ MonoBehaviour:
   onExit:
     m_PersistentCalls:
       m_Calls: []
-  m_North: {fileID: 0}
-  m_NorthAudio: {fileID: 0}
-  m_NorthDistance: 0
-  m_East: {fileID: 1078553102}
-  m_EastAudio: {fileID: 0}
-  m_EastDistance: 0
-  m_South: {fileID: 0}
-  m_SouthAudio: {fileID: 0}
-  m_SouthDistance: 0
-  m_West: {fileID: 2136096161}
-  m_WestAudio: {fileID: 0}
-  m_WestDistance: 0
+  audioSource: {fileID: 0}
+  connectingZones: []
 --- !u!1 &1342793041
 GameObject:
   m_ObjectHideFlags: 0
@@ -4690,7 +4796,7 @@ PrefabInstance:
     - target: {fileID: 1550294110092141840, guid: bda596476b82d5f449e4df18d7b91599,
         type: 3}
       propertyPath: m_Name
-      value: FloorPier (1)
+      value: FloorPierIsland
       objectReference: {fileID: 0}
     - target: {fileID: 2610985175406840206, guid: bda596476b82d5f449e4df18d7b91599,
         type: 3}
@@ -4795,18 +4901,8 @@ MonoBehaviour:
   onExit:
     m_PersistentCalls:
       m_Calls: []
-  m_North: {fileID: 2136096161}
-  m_NorthAudio: {fileID: 0}
-  m_NorthDistance: 0
-  m_East: {fileID: 2136096161}
-  m_EastAudio: {fileID: 0}
-  m_EastDistance: 0
-  m_South: {fileID: 0}
-  m_SouthAudio: {fileID: 0}
-  m_SouthDistance: 0
-  m_West: {fileID: 523897524}
-  m_WestAudio: {fileID: 0}
-  m_WestDistance: 0
+  audioSource: {fileID: 0}
+  connectingZones: []
 --- !u!1 &1516443318
 GameObject:
   m_ObjectHideFlags: 0
@@ -4817,6 +4913,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1516443320}
   - component: {fileID: 1516443319}
+  - component: {fileID: 1516443321}
   m_Layer: 0
   m_Name: SzeneManager
   m_TagString: Untagged
@@ -4842,6 +4939,7 @@ MonoBehaviour:
   - {fileID: 1750455534}
   playerOrigin: {fileID: 848133944}
   mainCamera: {fileID: 848133943}
+  audioManager: {fileID: 1516443321}
   activateValueInteractionLeft:
     m_UseReference: 1
     m_Action:
@@ -4868,9 +4966,11 @@ MonoBehaviour:
       m_Flags: 0
     m_Reference: {fileID: 7904272356298805229, guid: c348712bda248c246b8c49b3db54643f,
       type: 3}
+  fadingCanvas: {fileID: 759330654}
   StartZone: {fileID: 989795241}
   PositionOffset: {x: 0.08, y: 0, z: -0.3}
   TeleportationTarget: {fileID: 621900407}
+  teleportFadeDuration: 1
 --- !u!4 &1516443320
 Transform:
   m_ObjectHideFlags: 0
@@ -4884,9 +4984,22 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 621900408}
+  - {fileID: 759330651}
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1516443321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1516443318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b59788fca1bb361408dfe678118ccd1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1516557866
 GameObject:
   m_ObjectHideFlags: 0
@@ -5086,18 +5199,8 @@ MonoBehaviour:
   onExit:
     m_PersistentCalls:
       m_Calls: []
-  m_North: {fileID: 0}
-  m_NorthAudio: {fileID: 0}
-  m_NorthDistance: 0
-  m_East: {fileID: 0}
-  m_EastAudio: {fileID: 0}
-  m_EastDistance: 0
-  m_South: {fileID: 523897524}
-  m_SouthAudio: {fileID: 0}
-  m_SouthDistance: 0
-  m_West: {fileID: 0}
-  m_WestAudio: {fileID: 0}
-  m_WestDistance: 0
+  audioSource: {fileID: 0}
+  connectingZones: []
 --- !u!1 &1528800781
 GameObject:
   m_ObjectHideFlags: 0
@@ -5303,18 +5406,8 @@ MonoBehaviour:
   onExit:
     m_PersistentCalls:
       m_Calls: []
-  m_North: {fileID: 2136096161}
-  m_NorthAudio: {fileID: 0}
-  m_NorthDistance: 0
-  m_East: {fileID: 2136096161}
-  m_EastAudio: {fileID: 0}
-  m_EastDistance: 0
-  m_South: {fileID: 0}
-  m_SouthAudio: {fileID: 0}
-  m_SouthDistance: 0
-  m_West: {fileID: 523897524}
-  m_WestAudio: {fileID: 0}
-  m_WestDistance: 0
+  audioSource: {fileID: 0}
+  connectingZones: []
 --- !u!1 &1567846922
 GameObject:
   m_ObjectHideFlags: 0
@@ -5862,18 +5955,90 @@ MonoBehaviour:
   onExit:
     m_PersistentCalls:
       m_Calls: []
-  m_North: {fileID: 0}
-  m_NorthAudio: {fileID: 0}
-  m_NorthDistance: 0
-  m_East: {fileID: 989795241}
-  m_EastAudio: {fileID: 0}
-  m_EastDistance: 0
-  m_South: {fileID: 0}
-  m_SouthAudio: {fileID: 0}
-  m_SouthDistance: 0
-  m_West: {fileID: 0}
-  m_WestAudio: {fileID: 0}
-  m_WestDistance: 0
+  audioSource: {fileID: 0}
+  connectingZones:
+  - targetZone: {fileID: 989795241}
+    audioClip: {fileID: 8300000, guid: 5284306b9b8fb494082d1ed87cb3be22, type: 3}
+    distance: 0
+    minYRotation: 0
+    maxYRotation: 0
+    angleSpan: 60
+--- !u!1 &1770765113
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1770765114}
+  - component: {fileID: 1770765116}
+  - component: {fileID: 1770765115}
+  m_Layer: 5
+  m_Name: Image
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1770765114
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1770765113}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 759330651}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1770765115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1770765113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1770765116
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1770765113}
+  m_CullTransparentMesh: 1
 --- !u!1 &1801585603
 GameObject:
   m_ObjectHideFlags: 0
@@ -6129,18 +6294,14 @@ MonoBehaviour:
   onExit:
     m_PersistentCalls:
       m_Calls: []
-  m_North: {fileID: 0}
-  m_NorthAudio: {fileID: 0}
-  m_NorthDistance: 0
-  m_East: {fileID: 476161183}
-  m_EastAudio: {fileID: 0}
-  m_EastDistance: 0
-  m_South: {fileID: 476161183}
-  m_SouthAudio: {fileID: 0}
-  m_SouthDistance: 0
-  m_West: {fileID: 0}
-  m_WestAudio: {fileID: 0}
-  m_WestDistance: 0
+  audioSource: {fileID: 0}
+  connectingZones:
+  - targetZone: {fileID: 476161183}
+    audioClip: {fileID: 8300000, guid: 5284306b9b8fb494082d1ed87cb3be22, type: 3}
+    distance: 0
+    minYRotation: 0
+    maxYRotation: 0
+    angleSpan: 60
 --- !u!1 &1867173797
 GameObject:
   m_ObjectHideFlags: 0
@@ -7049,18 +7210,8 @@ MonoBehaviour:
   onExit:
     m_PersistentCalls:
       m_Calls: []
-  m_North: {fileID: 0}
-  m_NorthAudio: {fileID: 0}
-  m_NorthDistance: 0
-  m_East: {fileID: 1302324837}
-  m_EastAudio: {fileID: 0}
-  m_EastDistance: 0
-  m_South: {fileID: 1535930964}
-  m_SouthAudio: {fileID: 0}
-  m_SouthDistance: 0
-  m_West: {fileID: 0}
-  m_WestAudio: {fileID: 0}
-  m_WestDistance: 0
+  audioSource: {fileID: 0}
+  connectingZones: []
 --- !u!1 &2138011778
 GameObject:
   m_ObjectHideFlags: 0

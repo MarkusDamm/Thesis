@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class BezierFollow : MonoBehaviour
 {
-    [SerializeField] Transform[] routes;
-    [SerializeField] float speedModifier = 2f;
+    [SerializeField] private Transform[] routes;
+    [SerializeField] private float speedModifier = 2f;
+    [SerializeField] private int[] routBreaks;
     int routeToGo;
     float tParam;
     Vector3 targetPosition;
@@ -55,16 +56,18 @@ public class BezierFollow : MonoBehaviour
         routeToGo++;
 
 
-        coroutineAllowed = true;
         if (routeToGo > routes.Length - 1)
         {
             routeToGo = 0;
             coroutineAllowed = false;
         }
+        else
+            coroutineAllowed = true;
     }
 
     public void startBezierFollow()
     {
         coroutineAllowed = true;
+        // StartCoroutine(GoByTheRoute(routeToGo));
     }
 }

@@ -1,7 +1,42 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+
+[Serializable]
+public class ZoneProperties
+{
+    public Zone targetZone;
+    public AudioClip audioClip;
+    public float distance;
+    public float minYRotation;
+    public float maxYRotation;
+
+    [SerializeField, Range(20f, 60f)]
+    public float angleSpan = 30f;
+
+    public void CalculateYRotations(Transform _zoneOfDeparture)
+    {
+        // Debug.Log("Calculating " + targetZone + " From " + _zoneOfDeparture);
+        Vector3 vector3 = _zoneOfDeparture.position - targetZone.transform.position;
+        distance = vector3.magnitude;
+        vector3.Scale(new Vector3(1, 0, 1));
+        float angle = Vector3.Angle(_zoneOfDeparture.forward, vector3);
+        angle -= _zoneOfDeparture.eulerAngles.y;
+        // Debug.Log(angle);
+        while (angle < 0f)
+        {
+            angle += 360f;
+        }
+        while (angle > 360f)
+        {
+            angle -= 360f;
+        }
+        minYRotation = angle - angleSpan;
+        maxYRotation = angle + angleSpan;
+    }
+}
 
 public class Zone : MonoBehaviour
 {
@@ -9,70 +44,25 @@ public class Zone : MonoBehaviour
     public UnityEvent onEnter;
     public bool hasOnExit;
     public UnityEvent onExit;
-    [Header("North")]
-    [SerializeField] Zone m_North;
-    [SerializeField] AudioClip m_NorthAudio;
-    [SerializeField] float m_NorthDistance;
-    [Header("East")]
-    [SerializeField] Zone m_East;
-    [SerializeField] AudioClip m_EastAudio;
-    [SerializeField] float m_EastDistance;
-    [Header("South")]
-    [SerializeField] Zone m_South;
-    [SerializeField] AudioClip m_SouthAudio;
-    [SerializeField] float m_SouthDistance;
-    [Header("West")]
-    [SerializeField] Zone m_West;
-    [SerializeField] AudioClip m_WestAudio;
-    [SerializeField] float m_WestDistance;
+    public AudioSource audioSource;
 
-    public Zone North
+    [SerializeField] public ZoneProperties[] connectingZones;
+
+    private void Start()
     {
-        get { return m_North; }
-    }
-    public AudioClip NorthAudio
-    {
-        get { return m_NorthAudio; }
-    }
-    public float NorthDistance
-    {
-        get { return m_NorthDistance; }
-    }
-    public Zone East
-    {
-        get { return m_East; }
-    }
-    public AudioClip EastAudio
-    {
-        get { return m_EastAudio; }
-    }
-    public float EastDistance
-    {
-        get { return m_EastDistance; }
-    }
-    public Zone South
-    {
-        get { return m_South; }
-    }
-    public AudioClip SouthAudio
-    {
-        get { return m_SouthAudio; }
-    }
-    public float SouthDistance
-    {
-        get { return m_SouthDistance; }
-    }
-    public Zone West
-    {
-        get { return m_West; }
-    }
-    public AudioClip WestAudio
-    {
-        get { return m_WestAudio; }
-    }
-    public float WestDistance
-    {
-        get { return m_WestDistance; }
+        foreach (ZoneProperties zoneProperties in connectingZones)
+        {
+            zoneProperties.CalculateYRotations(transform);
+        }
+
+        if (!audioSource)
+        {
+            audioSource = GetComponentInChildren<AudioSource>();
+        }
+        if (!audioSource)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
     }
 
 }
