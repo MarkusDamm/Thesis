@@ -8,7 +8,7 @@ public class PortalSceneManager : SceneManager
 
     private Quaternion baseRotation;
 
-    private void Awake()
+    protected override void Awake()
     {
         baseRotation = playerOrigin.transform.localRotation;
     }

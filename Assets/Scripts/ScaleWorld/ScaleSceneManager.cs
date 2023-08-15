@@ -30,18 +30,18 @@ public class ScaleSceneManager : SceneManager
             if (leftGripAction.triggered || rightGripAction.triggered)
             {
                 bothPressed = true;
-                checkDualGrab(true);
+                CheckDualGrab(true);
             }
         }
         if (bothPressed && (leftGripAction.WasReleasedThisFrame() || rightGripAction.WasReleasedThisFrame()))
         {
             bothPressed = false;
-            checkDualGrab(false);
+            CheckDualGrab(false);
         }
 
     }
 
-    void checkDualGrab(bool _triggered)
+    void CheckDualGrab(bool _triggered)
     {
         // Vector3 leftContrPos = playerOrigin.transform.Find("LeftHand").position;
         // Vector3 rightContrPos = playerOrigin.transform.Find("RightHand").position;

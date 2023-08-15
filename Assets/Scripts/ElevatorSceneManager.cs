@@ -12,13 +12,13 @@ public class ElevatorSceneManager : SceneManager
     // Start is called before the first frame update
     void Start()
     {
-        currentFloor = estimateFloor();
+        currentFloor = EstimateFloor();
     }
 
     // Update is called once per frame
     void Update()
     {
-        currentFloor = estimateFloor();
+        currentFloor = EstimateFloor();
         Debug.Log("Current Floor: " + currentFloor + ".  Last Floor: " + lastFloor);
         if (!platformScript.canMove && platformScript.currentLevel != currentFloor)
         {
@@ -27,7 +27,7 @@ public class ElevatorSceneManager : SceneManager
         }
     }
 
-    int estimateFloor()
+    int EstimateFloor()
     {
         float currentHeigth = mainCamera.transform.position.y;
         int floorNumber = -1;
@@ -40,13 +40,13 @@ public class ElevatorSceneManager : SceneManager
         }
         if (floorNumber < 0)
         {
-            setPlayerToFloor(0);
+            SetPlayerToFloor(0);
             floorNumber = 0;
         }
         return floorNumber;
     }
 
-    void setPlayerToFloor(int _floor)
+    void SetPlayerToFloor(int _floor)
     {
         Vector3 playerPos = mainCamera.transform.position;
         mainCamera.transform.Translate(0, platformScript.points[_floor].position.y - playerPos.y, 0);

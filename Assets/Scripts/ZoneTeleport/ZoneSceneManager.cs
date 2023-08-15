@@ -1,49 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
-using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Rendering.HighDefinition;
-using UnityEngine.UI;
-// using UnityEngine.UIElements;
 
 public class ZoneSceneManager : SceneManager
 {
-    [SerializeField] private AudioManager audioManager;
     [SerializeField] private InputActionProperty activateValueInteractionLeft;
     [SerializeField] private InputActionProperty activateValueInteractionRight;
 
-    [SerializeField] Canvas fadingCanvas;
-
-    [SerializeField] Zone StartZone;
-    [SerializeField] Vector3 PositionOffset;
+    [SerializeField] Zone startZone;
+    [SerializeField] Vector3 positionOffset;
     Quaternion baseRotation;
-    [SerializeField] GameObject TeleportationTarget;
-    Zone CurrentZone;
+    [SerializeField] GameObject teleportationTarget;
+    Zone currentZone;
     float viewingDirection;
-    ZoneProperties TargetedZonesProperty;
+    ZoneProperties targetedZonesProperty;
     bool canTeleport;
     [SerializeField][Range(0.5f, 3f)] float teleportFadeDuration = 1f;
     static float teleportationCooldown = 3f;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         baseRotation = playerOrigin.transform.localRotation;
-        CurrentZone = StartZone;
-        teleport(StartZone);
+        currentZone = startZone;
+        TeleportPlayer(startZone);
         canTeleport = true;
-        TeleportationTarget.SetActive(false);
-
-        if (!fadingCanvas)
-        {
-            fadingCanvas = transform.GetComponentInChildren<Canvas>();
-        }
-        if (!audioManager)
-        {
-            audioManager = transform.GetComponent<AudioManager>();
-        }
-
-
+        teleportationTarget.SetActive(false);
     }
 
     private void Update()
@@ -53,132 +37,93 @@ public class ZoneSceneManager : SceneManager
 
         if ((triggerLeft > 0.1f || triggerRight > 0.1f) && canTeleport)
         {
-            prepareTeleport();
+            PrepareTeleport();
 
             if (triggerLeft > 0.99f || triggerRight > 0.99f)
             {
-                // audioManager.PlaySoundOnSource(TargetedZonesProperty.audioClip, CurrentZone.audioSource);
-                CurrentZone.audioSource.PlayOneShot(TargetedZonesProperty.audioClip);
+                // currentZone.audioSource.PlayOneShot(targetedZonesProperty.audioClip);
                 Debug.Log("Teleport Player");
                 canTeleport = false;
-                Invoke("enableTeleport", ZoneSceneManager.teleportationCooldown);
-                StartCoroutine(Teleport());
+                Invoke("EnableTeleport", ZoneSceneManager.teleportationCooldown);
+                StartCoroutine(HndTeleport());
             }
         }
         else
         {
-            TeleportationTarget.SetActive(false);
+            teleportationTarget.SetActive(false);
         }
 
     }
 
-    private void prepareTeleport()
+    private void PrepareTeleport()
     {
-        calculateViewingDirection();
-        displayTeleportTarget();
+        CalculateViewingDirection();
+        DisplayTeleportTarget();
     }
 
-    private void teleport(Zone _zone)
+    private void TeleportPlayer(Zone _zone)
     {
         playerOrigin.transform.SetParent(_zone.transform);
-        playerOrigin.transform.SetLocalPositionAndRotation(PositionOffset, baseRotation);
-        if (CurrentZone.hasOnExit)
+        playerOrigin.transform.SetLocalPositionAndRotation(positionOffset, baseRotation);
+        if (currentZone.hasOnExit)
         {
-            CurrentZone.onExit.Invoke();
+            currentZone.onExit.Invoke();
         }
-        CurrentZone = _zone;
-        if (CurrentZone.hasOnEnter)
+        currentZone = _zone;
+        if (currentZone.hasOnEnter)
         {
-            CurrentZone.onEnter.Invoke();
+            currentZone.onEnter.Invoke();
         }
         canTeleport = false;
-        Invoke("enableTeleport", ZoneSceneManager.teleportationCooldown);
+        Invoke("EnableTeleport", ZoneSceneManager.teleportationCooldown);
     }
 
-    private IEnumerator Teleport()
+    private IEnumerator HndTeleport()
     {
         // Play sound
-        // CurrentZone.audioSource.PlayOneShot(TargetedZonesProperty.audioClip);
-        // Debug.Log("Play Sound from " + _zoneProperties.targetZone);
+        currentZone.audioSource.PlayOneShot(targetedZonesProperty.audioClip);
 
         // Fade to Black
-        UnityEngine.UI.Image fadingImage = fadingCanvas.GetComponentInChildren<UnityEngine.UI.Image>();
         float faderSequenceDuration = teleportFadeDuration / 3f;
-        float fadingValuePerFrame = 1f / (60 * faderSequenceDuration);
-        float fadingValue = 0f;
-        Debug.Log("FaderSequenceDuration is " + faderSequenceDuration);
-        for (int i = 0; i < (faderSequenceDuration * 60f); i++)
-        {
-            fadingValue += fadingValuePerFrame;
-            SetFadeColorAlpha(fadingImage, fadingValue);
-            yield return new WaitForFixedUpdate();
-        }
-        SetFadeColorAlpha(fadingImage, 1);
-        Debug.Log("FadeColor is Black");
+        yield return StartCoroutine(Fade(true, faderSequenceDuration));
 
         // Teleport
-        playerOrigin.transform.SetParent(TargetedZonesProperty.targetZone.transform);
-        playerOrigin.transform.SetLocalPositionAndRotation(PositionOffset, baseRotation);
-        if (CurrentZone.hasOnExit)
-        {
-            CurrentZone.onExit.Invoke();
-        }
-        CurrentZone = TargetedZonesProperty.targetZone;
-        if (CurrentZone.hasOnEnter)
-        {
-            CurrentZone.onEnter.Invoke();
-        }
-
-        Debug.Log("Wait for Seconds");
+        TeleportPlayer(targetedZonesProperty.targetZone);
         yield return new WaitForSeconds(faderSequenceDuration);
-        Debug.Log("Wait over");
+
         // Fade Back
-        for (int j = 0; j < faderSequenceDuration * 60f; j++)
-        {
-            fadingValue -= fadingValuePerFrame;
-            SetFadeColorAlpha(fadingImage, fadingValue);
-            yield return new WaitForFixedUpdate();
-        }
-        SetFadeColorAlpha(fadingImage, 0);
+        yield return StartCoroutine(Fade(false, faderSequenceDuration));
     }
 
-    private void SetFadeColorAlpha(UnityEngine.UI.Image _image, float _alphaValue)
-    {
-        Color fadeColor = _image.color;
-        fadeColor.a = _alphaValue;
-        _image.color = fadeColor;
-    }
-
-    private void enableTeleport()
+    private void EnableTeleport()
     {
         canTeleport = true;
     }
 
-    private void calculateViewingDirection()
+    private void CalculateViewingDirection()
     {
         viewingDirection = mainCamera.transform.eulerAngles.y;
 
-        TargetedZonesProperty = null;
-        foreach (ZoneProperties zoneProperties in CurrentZone.connectingZones)
+        targetedZonesProperty = null;
+        foreach (ZoneProperties zoneProperties in currentZone.connectingZones)
         {
             if (viewingDirection < zoneProperties.maxYRotation && viewingDirection > zoneProperties.minYRotation)
             {
-                TargetedZonesProperty = zoneProperties;
-                // Debug.Log("Targetet Zone is " + TargetedZonesProperty.targetZone);
+                targetedZonesProperty = zoneProperties;
                 return;
             }
         }
 
     }
 
-    private void displayTeleportTarget()
+    private void DisplayTeleportTarget()
     {
-        if (TargetedZonesProperty == null)
+        if (targetedZonesProperty == null)
         {
             return;
         }
-        TeleportationTarget.SetActive(true);
-        TeleportationTarget.transform.position = TargetedZonesProperty.targetZone.transform.position + mainCamera.transform.localPosition + Vector3.down;
+        teleportationTarget.SetActive(true);
+        teleportationTarget.transform.position = targetedZonesProperty.targetZone.transform.position + mainCamera.transform.localPosition + Vector3.down;
         //+ PositionOffset
     }
 }
