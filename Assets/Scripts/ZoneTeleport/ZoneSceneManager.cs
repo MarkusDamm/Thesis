@@ -14,10 +14,10 @@ public class ZoneSceneManager : SceneManager
     [SerializeField] GameObject teleportationTarget;
     Zone currentZone;
     float viewingDirection;
-    ZoneProperties targetedZonesProperty;
+    ZoneTargetProperties targetedZonesProperty;
     bool canTeleport;
     [SerializeField][Range(0.5f, 3f)] float teleportFadeDuration = 1f;
-    static float teleportationCooldown = 3f;
+    static readonly float teleportationCooldown = 3f;
 
     protected override void Awake()
     {
@@ -39,7 +39,7 @@ public class ZoneSceneManager : SceneManager
         {
             PrepareTeleport();
 
-            if (triggerLeft > 0.99f || triggerRight > 0.99f)
+            if ((triggerLeft > 0.99f || triggerRight > 0.99f) && targetedZonesProperty != null)
             {
                 // currentZone.audioSource.PlayOneShot(targetedZonesProperty.audioClip);
                 Debug.Log("Teleport Player");
@@ -103,17 +103,22 @@ public class ZoneSceneManager : SceneManager
     private void CalculateViewingDirection()
     {
         viewingDirection = mainCamera.transform.eulerAngles.y;
-
+        Debug.Log("Viewing Direction " + viewingDirection);
         targetedZonesProperty = null;
-        foreach (ZoneProperties zoneProperties in currentZone.connectingZones)
+        foreach (ZoneTargetProperties zoneProperties in currentZone.connectingZones)
         {
-            if (viewingDirection < zoneProperties.maxYRotation && viewingDirection > zoneProperties.minYRotation)
+            float viewingAngle = Vector3.Angle(mainCamera.transform.forward, zoneProperties.targetVector.normalized);
+            if (viewingAngle < zoneProperties.angleSpan)
             {
                 targetedZonesProperty = zoneProperties;
                 return;
             }
+            // if (viewingDirection < zoneProperties.maxYRotation && viewingDirection > zoneProperties.minYRotation)
+            // {
+            //     targetedZonesProperty = zoneProperties;
+            //     return;
+            // }
         }
-
     }
 
     private void DisplayTeleportTarget()
