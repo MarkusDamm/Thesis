@@ -14,11 +14,6 @@ public class MovingZone : Zone
         CalculateConnectedZonesRotations();
     }
 
-    // public void ConnectZone(ZoneProperties _zone)
-    // {
-    //     connectingZones.SetValue(_zone, connectingZones.Length);
-    //     CalculateConnectedZonesRotations();
-    // }
     public void ConnectZone(Zone _zone)
     {
         ZoneTargetProperties connectZoneProperties = new(_zone);
@@ -34,12 +29,6 @@ public class MovingZone : Zone
         connectingZones = newArray;
         CalculateConnectedZonesRotations();
     }
-    // public void ConnectZone(Zone _zone, AudioClip _audioClip)
-    // {
-    //     ZoneProperties properties = new(_zone, _audioClip);
-    //     connectingZones.SetValue(_zone, connectingZones.Length);
-    //     CalculateConnectedZonesRotations();
-    // }
 
     public void DisconnectZone(Zone _zone)
     {
@@ -57,17 +46,6 @@ public class MovingZone : Zone
         connectingZones = newArray;
         CalculateConnectedZonesRotations();
     }
-    // public void DisconnectZone(ZoneProperties _zone)
-    // {
-    //     for (int i = 0; i < connectingZones.Length; i++)
-    //     {
-    //         if (connectingZones[i] == _zone)
-    //         {
-    //             connectingZones.SetValue(null, i);
-    //         }
-    //     }
-    //     CalculateConnectedZonesRotations();
-    // }
 
     public void ZoneMoves(bool _isMoving)
     {

@@ -41,8 +41,6 @@ public class ZoneSceneManager : SceneManager
 
             if ((triggerLeft > 0.99f || triggerRight > 0.99f) && targetedZonesProperty != null)
             {
-                // currentZone.audioSource.PlayOneShot(targetedZonesProperty.audioClip);
-                Debug.Log("Teleport Player");
                 canTeleport = false;
                 Invoke("EnableTeleport", ZoneSceneManager.teleportationCooldown);
                 StartCoroutine(HndTeleport());
@@ -103,7 +101,6 @@ public class ZoneSceneManager : SceneManager
     private void CalculateViewingDirection()
     {
         viewingDirection = mainCamera.transform.eulerAngles.y;
-        Debug.Log("Viewing Direction " + viewingDirection);
         targetedZonesProperty = null;
         foreach (ZoneTargetProperties zoneProperties in currentZone.connectingZones)
         {
@@ -113,11 +110,6 @@ public class ZoneSceneManager : SceneManager
                 targetedZonesProperty = zoneProperties;
                 return;
             }
-            // if (viewingDirection < zoneProperties.maxYRotation && viewingDirection > zoneProperties.minYRotation)
-            // {
-            //     targetedZonesProperty = zoneProperties;
-            //     return;
-            // }
         }
     }
 
@@ -127,6 +119,7 @@ public class ZoneSceneManager : SceneManager
         {
             return;
         }
+        // Problem with Ship-Rotation
         teleportationTarget.SetActive(true);
         teleportationTarget.transform.position = targetedZonesProperty.targetZone.transform.position + mainCamera.transform.localPosition + Vector3.down;
         //+ PositionOffset
