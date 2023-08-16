@@ -28,18 +28,21 @@ public class CorridorLoad : MonoBehaviour
         {
             if (loadObjects != null)
             {
-                foreach (GameObject objectToLoad in loadObjects)
-                {
-                    objectToLoad.SetActive(true);
-                }
+                ActivateChildObjects(loadObjects, true);
             }
             if (disableObjects != null)
             {
-                foreach (GameObject objectToDisable in disableObjects)
-                {
-                    objectToDisable.SetActive(false);
-                }
+                ActivateChildObjects(disableObjects, false);
             }
+            onEnter.Invoke();
+        }
+    }
+
+    public void ActivateChildObjects(GameObject[] _gameObjects, bool _activate)
+    {
+        foreach (GameObject objectToLoad in _gameObjects)
+        {
+            objectToLoad.SetActive(_activate);
         }
     }
 }
