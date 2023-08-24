@@ -48,7 +48,7 @@ public class ScaleSceneManager : SceneManager
         Vector3 leftContrPos = leftHand.position;
         Vector3 rightContrPos = rightHand.position;
         float currentControllerDistance = (leftContrPos - rightContrPos).magnitude;
-        Debug.Log(currentControllerDistance);
+        // Debug.Log(currentControllerDistance);
         if (_triggered)
         {
             controllerDistance = currentControllerDistance;

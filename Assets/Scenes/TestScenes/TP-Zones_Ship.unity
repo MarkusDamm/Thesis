@@ -1650,6 +1650,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorShipBow
       objectReference: {fileID: 0}
+    - target: {fileID: 1550294110092141840, guid: bda596476b82d5f449e4df18d7b91599,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2610985175406840206, guid: bda596476b82d5f449e4df18d7b91599,
         type: 3}
       propertyPath: m_RootOrder
@@ -2271,21 +2276,11 @@ MonoBehaviour:
       m_Calls: []
   audioSource: {fileID: 1587360170}
   connectingZones:
-  - targetZone: {fileID: 1520657202}
-    audioClip: {fileID: 8300000, guid: 5284306b9b8fb494082d1ed87cb3be22, type: 3}
-    distance: 0
-    targetVector: {x: 0, y: 0, z: 0}
-    angleSpan: 39.3
-  - targetZone: {fileID: 444055595}
-    audioClip: {fileID: 8300000, guid: 5284306b9b8fb494082d1ed87cb3be22, type: 3}
-    distance: 0
-    targetVector: {x: 0, y: 0, z: 0}
-    angleSpan: 39.9
   - targetZone: {fileID: 1535930964}
     audioClip: {fileID: 8300000, guid: 5284306b9b8fb494082d1ed87cb3be22, type: 3}
     distance: 0
     targetVector: {x: 0, y: 0, z: 0}
-    angleSpan: 40.1
+    angleSpan: 60
 --- !u!1 &525482195
 GameObject:
   m_ObjectHideFlags: 0
@@ -6412,7 +6407,7 @@ MonoBehaviour:
       m_Flags: 0
     m_Reference: {fileID: 7904272356298805229, guid: c348712bda248c246b8c49b3db54643f,
       type: 3}
-  startZone: {fileID: 1535930964}
+  startZone: {fileID: 1843811709}
   positionOffset: {x: 0.103, y: 0, z: -0.152}
   teleportationTarget: {fileID: 621900407}
   teleportFadeDuration: 1
@@ -6534,6 +6529,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FloorShipRear
+      objectReference: {fileID: 0}
+    - target: {fileID: 1550294110092141840, guid: bda596476b82d5f449e4df18d7b91599,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2610985175406840206, guid: bda596476b82d5f449e4df18d7b91599,
         type: 3}
