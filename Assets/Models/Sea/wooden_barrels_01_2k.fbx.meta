@@ -3,7 +3,23 @@ guid: a646d4b24ccdded41b942fa88df2a3ec
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: wooden_barrels_01_barrel01
+    second: {fileID: 2100000, guid: 6d802e354089f4f4fba5af69acb7a8d8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: wooden_barrels_01_barrel02
+    second: {fileID: 2100000, guid: c9e883198ff16be48934bb4b2e696fa4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: wooden_barrels_01_pieces
+    second: {fileID: -4099090524529705888, guid: 63e62b504ae01914d90d05ae4e14f25e,
+      type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

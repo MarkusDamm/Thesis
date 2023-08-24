@@ -11,7 +11,7 @@ public class MovingPlatform : MonoBehaviour
     [SerializeField] GameObject[] buttons;
 
     int m_currentLevel;
-    int i;
+    int targeLevel;
     bool reverse;
 
     public int currentLevel
@@ -30,14 +30,17 @@ public class MovingPlatform : MonoBehaviour
     void Start()
     {
         transform.position = points[startPoint].position;
-        i = currentLevel = startPoint;
+        targeLevel = currentLevel = startPoint;
 
         int n = 0;
-        foreach (var button in buttons)
+        if (buttons != null)
         {
-            if (n < points.Length - 1)
+            foreach (var button in buttons)
             {
-                button.SetActive(usesInput);
+                if (n < points.Length - 1)
+                {
+                    button.SetActive(usesInput);
+                }
             }
         }
 
@@ -46,40 +49,40 @@ public class MovingPlatform : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Vector3.Distance(transform.position, points[i].position) < 0.01f)
+        if (Vector3.Distance(transform.position, points[targeLevel].position) < 0.01f)
         {
             canMove = false;
             bars.SetActive(false);
-            currentLevel = i;
+            currentLevel = targeLevel;
 
-            if (i == points.Length - 1)
+            if (targeLevel == points.Length - 1)
             {
                 reverse = true;
-                i--;
+                targeLevel--;
                 return;
             }
-            else if (i == 0)
+            else if (targeLevel == 0)
             {
                 reverse = false;
-                i++;
+                targeLevel++;
                 return;
             }
 
-            if (reverse) { i--; }
-            else { i++; }
+            if (reverse) { targeLevel--; }
+            else { targeLevel++; }
         }
 
         if (canMove)
         {
-            transform.position = Vector3.MoveTowards(transform.position, points[i].position, speed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, points[targeLevel].position, speed * Time.deltaTime);
         }
     }
 
     public void MoveToLevel(int _level)
     {
-        i = _level;
+        targeLevel = _level;
         canMove = true;
-        bars.SetActive(true);
+        bars?.SetActive(true);
     }
 
 
