@@ -3,7 +3,22 @@ guid: e67fbd41d2c18cf4e980644e064bd200
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: modular_fort_01_plaster_1
+    second: {fileID: 2100000, guid: 11eb0c64b3996e249ab659094f2e96c4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: modular_fort_01_trim_1
+    second: {fileID: 2100000, guid: a0aba16e4b54799429bd340813923082, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: modular_fort_01_wall_1
+    second: {fileID: 2100000, guid: 1e999453d776ac34aac9a1b2c1bcb043, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
