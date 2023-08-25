@@ -27,7 +27,7 @@ public class CorridorBack : MonoBehaviour
             {
                 corridorLoad.ActivateChildObjects(corridorLoad.disableObjects, true);
             }
-            // corridorLoad.onEnter.Invoke(); Aber mit gegenevent...
+            // corridorLoad.onEnter.Invoke(); Aber mit gegen-event...
         }
 
     }
