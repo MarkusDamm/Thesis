@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class MovingPlatform : MonoBehaviour
 {
@@ -9,9 +10,13 @@ public class MovingPlatform : MonoBehaviour
     [SerializeField] Transform[] m_points;
     [SerializeField] GameObject bars;
     [SerializeField] GameObject[] buttons;
+    public UnityEvent onStart;
+    public UnityEvent onDestination;
+
 
     int m_currentLevel;
     int targeLevel;
+    int savedTarget;
     bool reverse;
 
     public int currentLevel
@@ -49,40 +54,72 @@ public class MovingPlatform : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Vector3.Distance(transform.position, points[targeLevel].position) < 0.01f)
-        {
-            canMove = false;
-            bars.SetActive(false);
-            currentLevel = targeLevel;
-
-            if (targeLevel == points.Length - 1)
-            {
-                reverse = true;
-                targeLevel--;
-                return;
-            }
-            else if (targeLevel == 0)
-            {
-                reverse = false;
-                targeLevel++;
-                return;
-            }
-
-            if (reverse) { targeLevel--; }
-            else { targeLevel++; }
-        }
 
         if (canMove)
         {
+            if (Vector3.Distance(transform.position, points[targeLevel].position) < 0.01f)
+            {
+                currentLevel = targeLevel;
+                Debug.Log("Compare current level: " + currentLevel + " with savedTarget: " + savedTarget);
+                if (currentLevel != savedTarget)
+                {
+                    AdjustTargetLevel(savedTarget);
+                }
+                else
+                {
+                    canMove = false;
+                    bars.SetActive(false);
+                    Debug.Log("Trigger onDestination");
+                    onDestination.Invoke();
+                    if (currentLevel == points.Length - 1)
+                    {
+                        reverse = true;
+                        targeLevel--;
+                        return;
+                    }
+                    else if (currentLevel == 0)
+                    {
+                        reverse = false;
+                        targeLevel++;
+                        return;
+                    }
+
+                    if (reverse) { targeLevel--; }
+                    else { targeLevel++; }
+                }
+
+            }
             transform.position = Vector3.MoveTowards(transform.position, points[targeLevel].position, speed * Time.deltaTime);
         }
     }
 
     public void MoveToLevel(int _level)
     {
-        targeLevel = _level;
-        canMove = true;
-        bars?.SetActive(true);
+        if (!canMove && currentLevel != _level)
+        {
+            AdjustTargetLevel(_level);
+            canMove = true;
+            bars?.SetActive(true);
+            onStart.Invoke();
+        }
+    }
+
+    private void AdjustTargetLevel(int _level)
+    {
+        savedTarget = _level;
+        if (currentLevel + 1 == _level || currentLevel - 1 == _level)
+        {
+            targeLevel = _level;
+        }
+        else if (_level < currentLevel)
+        {
+            targeLevel = currentLevel - 1;
+        }
+        else
+        {
+            targeLevel = currentLevel + 1;
+        }
+
     }
 
 

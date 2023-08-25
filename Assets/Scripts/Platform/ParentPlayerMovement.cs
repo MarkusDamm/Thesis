@@ -14,7 +14,7 @@ public class ParentPlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("collision with " + collision);
+        Debug.Log(gameObject + " collision with " + collision);
         if (collision.gameObject.tag == "Player" && !platform.usesInput)
         {
             playerTransform = collision.transform.parent;
