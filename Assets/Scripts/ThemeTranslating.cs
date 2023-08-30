@@ -36,13 +36,13 @@ public class ThemeTranslating : Theme
         while (counter < 60 * themeManager.themeChangeDuration)
         {
             if (groundedObjectParent != null)
-                TranslateObjects(groundedObjectParent, distancePerSecond /60);
+                TranslateObjects(groundedObjectParent, distancePerSecond / 60);
 
             if (walledObjectParent != null)
-                TranslateObjects(walledObjectParent, distancePerSecond * Time.deltaTime);
+                TranslateObjects(walledObjectParent, distancePerSecond / 60);
 
             if (wallsParent != null)
-                TranslateObjects(wallsParent, distancePerSecond * Time.deltaTime);
+                TranslateObjects(wallsParent, distancePerSecond / 60);
 
             counter++;
             yield return null;

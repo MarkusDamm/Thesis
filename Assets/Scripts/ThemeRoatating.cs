@@ -34,6 +34,8 @@ public class ThemeRotating : Theme
 
     IEnumerator Rotation()
     {
+        HandleColliders(false);
+        ActivateObjects(true);
         int counter = 0;
         float speed = 3f / themeManager.themeChangeDuration;
         while (counter < 60 * themeManager.themeChangeDuration)
