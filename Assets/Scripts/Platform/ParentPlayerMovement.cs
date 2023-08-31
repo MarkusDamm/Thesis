@@ -4,6 +4,7 @@ public class ParentPlayerMovement : MonoBehaviour
 {
     Transform playerTransform;
     MovingPlatform platform;
+    Transform previousParent;
 
 
     // Start is called before the first frame update
@@ -28,29 +29,29 @@ public class ParentPlayerMovement : MonoBehaviour
 
     public void ParentPlayer(bool isTrue)
     {
+        if(playerTransform == null)
+            playerTransform = GameObject.Find("SzeneManager").GetComponent<SceneManager>().playerOrigin.transform;
+
         if (isTrue)
+        {
+            previousParent = playerTransform.parent;
             playerTransform.SetParent(transform);
+        }
 
         else
         {
-            playerTransform.SetParent(null);
+            playerTransform.SetParent(previousParent);
             platform.canMove = false;
+            previousParent = null;
         }
 
     }
 
     private void OnCollisionExit(Collision collision)
     {
-        if (collision.gameObject.tag == "Player" /* && !platform.usesInput */ )
+        if (collision.gameObject.tag == "Player" && platform.canMove == false )
         {
             ParentPlayer(false);
-            // playerTransform.SetParent(null);
-
-            // playerTransform = null;
-            // collision.transform.parent.parent.SetParent(null);
-            // collision.transform.SetParent(null);
-
-            // platform.canMove = false;
         }
     }
 }

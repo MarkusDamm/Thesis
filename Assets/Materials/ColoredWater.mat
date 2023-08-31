@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Waa
+  m_Name: ColoredWater
   m_Shader: {fileID: -6465566751694194690, guid: fc2251bc6bbc5154ea10ceac26ae82f0,
     type: 3}
   m_Parent: {fileID: 0}

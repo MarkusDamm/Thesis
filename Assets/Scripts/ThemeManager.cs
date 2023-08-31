@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using OpenCover.Framework.Model;
-using Unity.PlasticSCM.Editor.WebApi;
 using UnityEngine;
 
 public class ThemeManager : MonoBehaviour
